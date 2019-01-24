@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>User Register</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container" id="main_frame">
+		<form role="form" id="register_form" action='user_register.php' method="POST" enctype="multipart/form-data">
+			<div style="text-align:center;"><h2>User Registration</h2></div>
+			<div class="form-group">
+				<label for="user_name">User Name *</label>
+				<input class="form-control" id="user_name" type="text" placeholder="Input User Name" row=1></input>
+			</div>
+			<div class="form-group">
+				<label for="password">Password *</label>
+				<input class="form-control" id="password" type="text" placeholder="Password" row=1></input>
+			</div>
+			<div class="form-group">
+				<label for="retype_password">Retype Password *</label>
+				<input class="form-control" id="retype_password" type="text" placeholder="Retype Password" row=1></input>
+			</div>
+			<div class="form-group">
+				<label for="e_mail">E-mail</label>
+				<input class="form-control" id="e_mail" type="text" placeholder="E-mail Address" row=1></input>
+			</div>
+			<div class="form-group">
+				<label for="phone_num">Phone Number *</label>
+				<input class="form-control" id="phone_num" type="text" placeholder="Phone Number" row=1></input>
+			</div>
+			<div class="col-md-12 text-center">
+				<button type="button" class="btn btn_default" onclick="Submit_Form(this)"> Submit </button>
+			</div>
+
+			<input type="submit" hidden="hidden" id="submit_form" name="submitit"></input>
+		</form>
+	</div>
+</body>
+
+<script language="javascript">
+function Submit_Form(form) {
+	if ($('#user_name').val() == '') {
+		alert('User name can not be empty!');
+		return;
+	}
+	if ($('#password').val() == '') {
+		alert('Password can not be empty!');
+		return;
+	}
+
+	if ($('#password').val() != $('#retype_password').val()) {
+		alert('Passwords are not the same!');
+		return;
+	}
+
+	if ($('#e_mail').val() != '') {
+		var pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if (!pattern.test(String($('#e_mail').val()).toLowerCase())) {
+			alert('Invalid e-mail address!');
+			return;
+		}
+	}
+
+	if ($('#phone_num').val() == '') {
+		alert('Phone number can not be empty!');
+		return;
+	}
+	else {
+		var pattern = /^\(?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
+			if (!pattern.test(String($('#phone_num').val()).toLowerCase())) {
+			alert('Invalid phone number!');
+			return;
+		}
+	}
+
+	alert("Submit");
+	$('#submit_form').click();
+}
+
+</script>
+
+</html>
